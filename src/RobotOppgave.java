@@ -5,7 +5,7 @@ class Verden {
     String gg = "GG";
     String text = "Kan dere se dette??";
     // endre metoden for å returnere true hvis det er søndag (hint: Modulo %)
-    public boolean erSondag() {
+    public int erSondag() {
         return dag % 7;
     }
 }
