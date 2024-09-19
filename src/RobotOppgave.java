@@ -33,19 +33,10 @@ class Robot {
     public boolean gaaTilParken(Verden verden) {
         // System.out.println(navn + " sjekker om det er mulig å gå til parken...");
         // Sjekk om det regner
-        if ((verden.regner || !verden.erSondag()) && sjekkOmNokBatteri(this.batteriNivaa, this.avstandTilParken) ){
+        if ((verden.regner || !verden.erSondag()) && sjekkOmNokBatteri() ){
             // skriv ut hvorfor boten ikke kan gå i parken med System.out.println
             return false;
         }
-
-        public boolean sjekkOmNokBatteri(this.batteriNivaa, this.avstandTilParken) {
-            this.avstandTilParken = this.avstandTilParken / 100;
-            if (this.batteriNivaa > this.avstandTilParken) {
-                return true;
-            }
-            return false;
-        }
-        
 
         // Sjekk om det er søndag. Kan bare gå i parken på søndager.
 
@@ -54,6 +45,16 @@ class Robot {
 
         return true;
     }
+
+    public boolean sjekkOmNokBatteri(double batteriNivaa, int avstandTilParken) {
+        int avstandForBatteri = this.avstandTilParken / 100;
+
+        if (this.batteriNivaa > this.avstandForBatteri) {
+            return true;
+        }
+        return false;
+    }
+    
 
     // lag en metode som sjekker om boten kan være med på danseklubben
     // bottypen må være av type B-Bot (hint .equals)
