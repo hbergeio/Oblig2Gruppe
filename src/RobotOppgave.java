@@ -3,6 +3,7 @@ class Verden {
     boolean regner;
     int dag; // 1 er Mandag, 2 er Tirsdag, ..., 7 for Søndag, 8 er Mandag...
     String gg = "GG";
+    String text = "Kan dere se dette??";
     // endre metoden for å returnere true hvis det er søndag (hint: Modulo %)
     public boolean erSondag() {
         return false;
