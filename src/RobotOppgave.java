@@ -2,7 +2,7 @@
 class Verden {
     boolean regner;
     int dag; // 1 er Mandag, 2 er Tirsdag, ..., 7 for Søndag, 8 er Mandag...
-    
+
     // endre metoden for å returnere true hvis det er søndag (hint: Modulo %)
     public boolean erSondag(int dag) {
         return dag % 7 == 0;
@@ -11,27 +11,43 @@ class Verden {
 
 class Robot {
     // gi robotten 4 attributter: navn, batteriNivaa, avstandTilParken og botType
+    String navn, botType;
+    double batteriNivaa;
+    int avstandTilParken;
 
+    public Robot (String navn, String botType, double batteriNivaa, int avstandTilParken) {
+        this.navn = navn;
+        this.botType = botType;
+        this.batteriNivaa = batteriNivaa;
+        this.avstandTilParken = avstandTilParken;
+    }
     // ENdre metoden slik at den retunerer en tekst streng som forklarer statusen til roboten
     // eksempel: Dette er bot Dancatron 4000 av type B-Bot.
     // Denne enheten har 80.0 batterikapasitet igjen og bor 1500 meter fra parken.
-    public String giStatus(){
-        return "";
+
+    public void giStatus() {
+        System.out.print("Dette er bot " + this.navn + " av type " + this.botType + "\nDenne enheten har " + this.batteriNivaa + " batterikapasitet igjen og bor " + this.avstandTilParken + " meter fra parken.");
     }
 
     // Metode for å sjekke om roboten kan gå til parken basert på omgivelsene
     public boolean gaaTilParken(Verden verden) {
-//        System.out.println(navn + " sjekker om det er mulig å gå til parken...");
-
+        // System.out.println(navn + " sjekker om det er mulig å gå til parken...");
         // Sjekk om det regner
-        if (verden.regner){
+        if ((verden.regner || !verden.erSondag()) && sjekkOmNokBatteri(this.batteriNivaa, this.avstandTilParken) ){
             // skriv ut hvorfor boten ikke kan gå i parken med System.out.println
             return false;
         }
 
+        public boolean sjekkOmNokBatteri(this.batteriNivaa, this.avstandTilParken) {
+            this.avstandTilParken = this.avstandTilParken / 100;
+            if (this.batteriNivaa > this.avstandTilParken) {
+                return true;
+            }
+            return false;
+        }
+        
 
         // Sjekk om det er søndag. Kan bare gå i parken på søndager.
-
 
         // Sjekk batterinivå. En bot trenger 1% batterinivå per 100 meter for å gå til parken.
 
@@ -45,6 +61,8 @@ class Robot {
     // Det kan ikke være mandag. Da er danseklubben stengt.
 
 }
+
+
 
 public class RobotOppgave {
     public static void main(String[] args) {
@@ -62,5 +80,6 @@ public class RobotOppgave {
 
         // Sjekker om robotene kan gå til danseklubben
         // Sjekker om robotene kan gå til parken
+        
     }
 }
