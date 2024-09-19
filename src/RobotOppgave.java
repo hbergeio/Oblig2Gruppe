@@ -26,10 +26,10 @@ class Robot {
         this.batteriNivaa = batteriNivaa;
         this.avstandTilParken = avstandTilParken;
     }
+
     // ENdre metoden slik at den retunerer en tekst streng som forklarer statusen til roboten
     // eksempel: Dette er bot Dancatron 4000 av type B-Bot.
     // Denne enheten har 80.0 batterikapasitet igjen og bor 1500 meter fra parken.
-
     public void giStatus() {
         System.out.print("Dette er bot " + this.navn + " av type " + this.botType + "\nDenne enheten har " + this.batteriNivaa + " batterikapasitet igjen og bor " + this.avstandTilParken + " meter fra parken.\n\n");
     }
@@ -37,7 +37,8 @@ class Robot {
     // Metode for å sjekke om roboten kan gå til parken basert på omgivelsene
     public boolean gaaTilParken(Verden verden) {
         System.out.println(this.navn + " sjekker om det er mulig aa gaa til parken...\n");
-        // Sjekker om det regner
+        
+        // Sjekk om det regner
         if (verden.regner) {
             System.out.println(this.navn + " kan ikke gaa til parken fordi det regner.\n");
             return false;
@@ -54,42 +55,41 @@ class Robot {
             System.out.println(this.navn + " kan ikke gaa til parken fordi det ikke er nok batteri.\n");
             return false;
         }
-    
 
         System.out.println(this.navn + " kan gaa til parken!\n");
-
-
         return true;
     }
 
     public boolean sjekkOmNokBatteri(double batteriNivaa, int avstandTilParken) {
         return batteriNivaa > (avstandTilParken / 100);
     }
-    
 
     // lag en metode som sjekker om boten kan være med på danseklubben
     // bottypen må være av type B-Bot (hint .equals)
     // En bot trenger minimum 50% batterikapasitet for å være med
     // Det kan ikke være mandag. Da er danseklubben stengt.
-   public boolean kanDanse(Verden verden) {
-    String message;
-    if (verden.dag % 7 == 1) {
-        System.out.println(navn + " kan ikke delta i danseklubben fordi det er mandag");
-        return false;
-    }
+    public boolean kanDanse(Verden verden) {
+        String message;
+        // Sjekk om det er mandag
+        if (verden.dag % 7 == 1) {
+            System.out.println(navn + " kan ikke delta i danseklubben fordi det er mandag.");
+            return false;
+        }
 
-    if (!this.botType.equals("B-Bot")) {
-        System.out.println(navn + " kan ikke delta i danseklubben fordi det ikke er en B-Bot.");
-        return false;
-    }
+        // Sjekk botType
+        if (!this.botType.equals("B-Bot")) {
+            System.out.println(navn + " kan ikke delta i danseklubben fordi det ikke er en B-Bot.");
+            return false;
+        }
 
-    if (this.batteriNivaa <= 50) {
-        System.out.println(navn + " har ikke energi til å danse...");
-        return false;
-    }
+        // Sjekk batterinivå
+        if (this.batteriNivaa <= 50) {
+            System.out.println(navn + " har ikke energi til å danse...");
+            return false;
+        }
 
-    System.out.println(navn + " kan delta i danseklubben!");
-    return true;
+        System.out.println(navn + " kan delta i danseklubben!");
+        return true;
     }
 }
 
@@ -108,14 +108,11 @@ public class RobotOppgave {
         rob2.giStatus();
 
         // Sjekker om robotene kan gå til parken
-
         rob1.gaaTilParken(dagensVerden);
         rob2.gaaTilParken(dagensVerden);
 
         // Sjekker om robotene kan gå til danseklubben
-
         rob1.kanDanse(dagensVerden);
         rob2.kanDanse(dagensVerden);
-        
     }
 }
